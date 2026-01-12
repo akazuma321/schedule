@@ -8,8 +8,34 @@
   ],
   "routes": [
     {
+      "src": "/five",
+      "dest": "/"
+    },
+    {
+      "src": "/index",
+      "dest": "/"
+    },
+    {
+      "src": "/index.html",
+      "dest": "/"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/five",
+      "destination": "/"
+    },
+    {
+      "source": "/index",
+      "destination": "/"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/"
     }
   ]
 }
