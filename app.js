@@ -45,7 +45,6 @@ const modalTitle = document.getElementById('modalTitle');
 const modalDate = document.getElementById('modalDate');
 const modalTime = document.getElementById('modalTime');
 const bookingName = document.getElementById('bookingName');
-const bookingTypeSelect = document.getElementById('bookingTypeSelect');
 const bookingNote = document.getElementById('bookingNote');
 const saveBookingBtn = document.getElementById('saveBooking');
 const deleteBookingBtn = document.getElementById('deleteBooking');
@@ -187,15 +186,11 @@ function openBookingModal(dateKey, time, existingBooking = null) {
     if (existingBooking) {
         modalTitle.textContent = '予約を編集';
         bookingName.value = existingBooking.name || '';
-        bookingTypeSelect.value = existingBooking.type;
         bookingNote.value = existingBooking.note || '';
         deleteBookingBtn.style.display = 'block';
     } else {
         modalTitle.textContent = '予約を設定';
         bookingName.value = '';
-        // デフォルトタイプを設定
-        const defaultType = getDefaultBookingType(dateKey);
-        bookingTypeSelect.value = defaultType || 'group';
         bookingNote.value = '';
         deleteBookingBtn.style.display = 'none';
     }
@@ -224,10 +219,13 @@ function saveBooking() {
         bookings[selectedDate] = {};
     }
     
+    // デフォルトタイプを自動設定
+    const defaultType = getDefaultBookingType(selectedDate) || 'group';
+    
     // 予約を保存する際は自動的に予約済みにする
     bookings[selectedDate][selectedTime] = {
         name: name,
-        type: bookingTypeSelect.value,
+        type: defaultType,
         status: 'booked', // 埋まったら自動的に予約済み
         note: bookingNote.value.trim()
     };
