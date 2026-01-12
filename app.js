@@ -15,6 +15,19 @@ function getAvailableTimeSlots(dateKey) {
     return [];
 }
 
+// 日付ごとのデフォルト予約タイプを取得
+function getDefaultBookingType(dateKey) {
+    // 1/14, 1/18: 1on1
+    if (dateKey === '2026-01-14' || dateKey === '2026-01-18') {
+        return '1on1';
+    }
+    // 1/20, 1/27: グループ
+    if (dateKey === '2026-01-20' || dateKey === '2026-01-27') {
+        return 'group';
+    }
+    return null;
+}
+
 // 時間スロットが利用可能かチェック
 function isTimeSlotAvailable(dateKey, time) {
     const availableSlots = getAvailableTimeSlots(dateKey);
@@ -87,6 +100,24 @@ function createDayElement(year, month, day, isOtherMonth, dateKey) {
     const dayNumber = document.createElement('div');
     dayNumber.className = 'day-number';
     dayNumber.textContent = day;
+    
+    // 日付ごとのタイプに応じてアイコンを表示
+    const defaultType = getDefaultBookingType(dateKey);
+    if (defaultType) {
+        const typeIcon = document.createElement('span');
+        typeIcon.className = 'day-type-icon';
+        typeIcon.textContent = defaultType === '1on1' ? '👤' : '👥';
+        typeIcon.title = defaultType === '1on1' ? '1on1枠' : 'グループ枠';
+        dayNumber.appendChild(typeIcon);
+        
+        // タイプに応じてクラスを追加
+        if (defaultType === '1on1') {
+            dayElement.classList.add('day-1on1');
+        } else {
+            dayElement.classList.add('day-group');
+        }
+    }
+    
     dayElement.appendChild(dayNumber);
     
     // この日の予約を取得
@@ -113,6 +144,15 @@ function createDayElement(year, month, day, isOtherMonth, dateKey) {
         } else if (isAvailable) {
             // 利用可能な時間帯
             timeSlot.classList.add('available');
+            // デフォルトタイプに応じてクラスを追加
+            const defaultType = getDefaultBookingType(dateKey);
+            if (defaultType === '1on1') {
+                timeSlot.classList.add('slot-1on1');
+                timeSlot.textContent = `👤 ${time}`;
+            } else if (defaultType === 'group') {
+                timeSlot.classList.add('slot-group');
+                timeSlot.textContent = `👥 ${time}`;
+            }
         }
         
         timeSlot.addEventListener('click', () => {
@@ -153,7 +193,9 @@ function openBookingModal(dateKey, time, existingBooking = null) {
     } else {
         modalTitle.textContent = '予約を設定';
         bookingName.value = '';
-        bookingTypeSelect.value = 'group';
+        // デフォルトタイプを設定
+        const defaultType = getDefaultBookingType(dateKey);
+        bookingTypeSelect.value = defaultType || 'group';
         bookingNote.value = '';
         deleteBookingBtn.style.display = 'none';
     }
