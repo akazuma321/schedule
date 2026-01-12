@@ -6,10 +6,10 @@ let selectedTime = null;
 
 // 利用可能な時間帯の定義
 function getAvailableTimeSlots(dateKey) {
-    // 1/14, 1/18, 1/20, 1/27 12:00-13:00（12時から13時まで）
+    // 1/14, 1/18, 1/20, 1/27 12:00（12時のみ）
     const availableDates = ['2026-01-14', '2026-01-18', '2026-01-20', '2026-01-27'];
     if (availableDates.includes(dateKey)) {
-        return ['12時', '13時'];
+        return ['12時'];
     }
     // それ以外の日は利用不可
     return [];
