@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>予約一覧 - かずま</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📋 予約一覧</h1>
+            <a href="index.html" class="list-link">📅 カレンダーに戻る</a>
+        </header>
+
+        <main class="main-content">
+            <div class="bookings-list-container">
+                <div id="bookingsList" class="bookings-list">
+                    <!-- 予約一覧が動的に生成されます -->
+                </div>
+                <div id="noBookings" class="no-bookings" style="display: none;">
+                    <p>予約がありません</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="list.js"></script>
+</body>
+</html>

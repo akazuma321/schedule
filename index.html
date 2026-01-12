@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>かずま</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>かずま</h1>
+            <p class="subtitle">時間をタップして予約を管理しましょう</p>
+            <a href="list.html" class="list-link">📋 予約一覧を見る</a>
+        </header>
+
+        <main class="main-content">
+            <div class="booking-types">
+                <div class="booking-type">
+                    <div class="type-icon">👥</div>
+                    <div class="type-info">
+                        <h3>グループ</h3>
+                        <p>みんなでワイワイ楽しく（最大5名）</p>
+                    </div>
+                </div>
+                <div class="booking-type">
+                    <div class="type-icon">👤</div>
+                    <div class="type-info">
+                        <h3>1on1</h3>
+                        <p>ふたりでゆっくり話したいときに</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button class="nav-btn" id="prevMonth">‹</button>
+                    <h2 id="currentMonth">2026年 1月</h2>
+                    <button class="nav-btn" id="nextMonth">›</button>
+                </div>
+
+                <div class="calendar-weekdays">
+                    <div class="weekday">日</div>
+                    <div class="weekday">月</div>
+                    <div class="weekday">火</div>
+                    <div class="weekday">水</div>
+                    <div class="weekday">木</div>
+                    <div class="weekday">金</div>
+                    <div class="weekday">土</div>
+                </div>
+
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- カレンダーの日付が動的に生成されます -->
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color available"></div>
+                        <span>空いてる</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color recruiting"></div>
+                        <span>仲間募集中</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color booked"></div>
+                        <span>予約済み</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 予約モーダル -->
+        <div class="modal" id="bookingModal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2 id="modalTitle">予約を設定</h2>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>日付:</label>
+                        <p id="modalDate"></p>
+                    </div>
+                    <div class="form-group">
+                        <label>時間:</label>
+                        <p id="modalTime"></p>
+                    </div>
+                    <div class="form-group">
+                        <label>予約名 <span class="required">*</span>:</label>
+                        <input type="text" id="bookingName" placeholder="予約者名を入力" required>
+                    </div>
+                    <div class="form-group">
+                        <label>予約タイプ:</label>
+                        <select id="bookingTypeSelect">
+                            <option value="group">👥 グループ</option>
+                            <option value="1on1">👤 1on1</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>メモ:</label>
+                        <textarea id="bookingNote" placeholder="メモを入力（任意）"></textarea>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="saveBooking">保存</button>
+                    <button class="btn btn-danger" id="deleteBooking">削除</button>
+                    <button class="btn btn-secondary" id="cancelBooking">キャンセル</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
