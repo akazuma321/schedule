@@ -72,7 +72,6 @@ function renderBookingsList() {
             <div class="booking-info">
                 <div class="booking-name">${booking.name || '予約名なし'}</div>
                 <div class="booking-type">${typeIcon} ${typeText}</div>
-                ${booking.note ? `<div class="booking-note">${booking.note}</div>` : ''}
             </div>
             <button class="btn-delete" data-date="${booking.dateKey}" data-time="${booking.time}">削除</button>
         `;
